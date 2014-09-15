@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Computes the number of inversions in an array of integers.
+ * Computes the number of inversions in an array of integers
+ * using recursion in Java.
  */
 public class InversionCounter {
 
@@ -28,7 +29,7 @@ public class InversionCounter {
     /**
      * Parse the array of integers from a file.
      */
-    private static List<Integer> parseArgs(String[] args) throws IOException {
+    protected static List<Integer> parseArgs(String[] args) throws IOException {
         if (args.length < 1) {
             throw new IllegalArgumentException("Input file not specified.");
         }
