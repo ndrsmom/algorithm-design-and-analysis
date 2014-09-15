@@ -15,6 +15,14 @@ The counting inversions problem is a way to measure numerical similarity between
 
 Because of the large size of this array, we will use a fast divide-and-conquer algorithm.
 
+Let's break this down into different types of inversions:
 
+- **Left** inversion: If both indices <= n/2
+- **Right** inversion: If both indices > n/2
+- **Split** inversion: If one index <= n/2 and the other is > n/2
+
+The left and right inversions can be counted **recursively**. The split inversions will have to be counted separately. We should aim to count the split inversions in linear time so that the entire algorithm only costs O(NlogN).
+
+We can accomplish this by having the recursive steps **sort** in addition to counting inversions. This will naturally uncover any split inversions.
 
 

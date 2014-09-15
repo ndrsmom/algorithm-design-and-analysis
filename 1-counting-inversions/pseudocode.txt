@@ -1,0 +1,26 @@
+sortandcount(array A, length n)
+	if (n = 1) return (A, 0)
+	else
+		(B, x) = sortandcount (1st half of A, n/2)
+		(C, y) = sortandcount (2nd half of A, n/2)
+		(D, z) = mergeandcountsplit(B, C, n)
+		return (A, x + y + z)
+
+
+mergeandcountsplit(array B, array C, length n)
+// populate D in sorted order, choosing least
+for k = 1 to n
+	if B(i) < C(j)
+		D(k) = B(i)
+		i++
+	else [C(j) < B(i)]
+		D(k) = C(j)
+		j++
+		// inversion if copying from C before exhausting B
+		if (i < B.length)
+			// increment by number of elts remaining in B,
+			// because all remaining in B are less than C(j)
+			count += B.length - i
+
+Concerns:
+Holding the entire list in memory
