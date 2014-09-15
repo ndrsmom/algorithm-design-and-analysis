@@ -53,7 +53,7 @@ public class InversionCounter {
     /**
      * Recursively compute the number of inversions via sorting.
      */
-    private static Pair<List<Integer>, Long> recursiveSortAndCount(List<Integer> array) {
+    protected static Pair<List<Integer>, Long> recursiveSortAndCount(List<Integer> array) {
         int length = array.size();
         // base case
         if (length <= 1) {
@@ -71,7 +71,7 @@ public class InversionCounter {
     /**
      * Compute the split inversions by merging the sorted arrays.
      */
-    private static Pair<List<Integer>, Long> mergeAndCountSplit(List<Integer> left, List<Integer> right) {
+    protected static Pair<List<Integer>, Long> mergeAndCountSplit(List<Integer> left, List<Integer> right) {
         List<Integer> merged = new ArrayList<>();
         Long count = 0L;
         int i = 0;
