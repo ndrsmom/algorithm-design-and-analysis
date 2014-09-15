@@ -15,20 +15,20 @@ public class InversionCounter {
 	public static void main(String[] args) {
 		try {
             String[] input = {"./resources/IntegerArray.txt"};
-			new InversionCounter().countInversions(input);
+			System.out.println("Inversions: " + countInversions(input));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void countInversions(String[] args) throws IOException {
-        System.out.println("Inversions: " + recursiveSortAndCount(parseArgs(args)).second());
+	public static Long countInversions(String[] args) throws IOException {
+        return recursiveSortAndCount(parseArgs(args)).second();
 	}
 
     /**
      * Parse the array of integers from a file.
      */
-    private List<Integer> parseArgs(String[] args) throws IOException {
+    private static List<Integer> parseArgs(String[] args) throws IOException {
         if (args.length < 1) {
             throw new IllegalArgumentException("Input file not specified.");
         }
@@ -53,7 +53,7 @@ public class InversionCounter {
     /**
      * Recursively compute the number of inversions via sorting.
      */
-    private Pair<List<Integer>, Long> recursiveSortAndCount(List<Integer> array) {
+    private static Pair<List<Integer>, Long> recursiveSortAndCount(List<Integer> array) {
         int length = array.size();
         // base case
         if (length <= 1) {
@@ -71,7 +71,7 @@ public class InversionCounter {
     /**
      * Compute the split inversions by merging the sorted arrays.
      */
-    private Pair<List<Integer>, Long> mergeAndCountSplit(List<Integer> left, List<Integer> right) {
+    private static Pair<List<Integer>, Long> mergeAndCountSplit(List<Integer> left, List<Integer> right) {
         List<Integer> merged = new ArrayList<>();
         Long count = 0L;
         int i = 0;
@@ -98,7 +98,7 @@ public class InversionCounter {
     /**
      * Helper class for creating pairs
      */
-    public class Pair<A, B> {
+    public static class Pair<A, B> {
         public final A first;
         public final B second;
         public Pair(A first, B second) {

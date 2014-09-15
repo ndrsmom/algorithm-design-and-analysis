@@ -1,14 +1,19 @@
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 /**
  * Tests for {@link InversionCounter}.
  */
 public class InversionCounterTest {
-    // TODO
+    private static final String PATH = "./test/resources/";
+
+    /* Acceptance Tests */
+
+    @Test
+    public void emptyListTest() throws Exception {
+        long count = InversionCounter.countInversions(new String[]{PATH + "Test1.txt"});
+        assertEquals(0L, count);
+    }
 }
 
