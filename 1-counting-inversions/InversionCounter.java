@@ -77,22 +77,21 @@ public class InversionCounter {
         Long count = 0L;
         int i = 0;
         int j = 0;
-        for (int k = 0; k < left.size() + right.size(); k++) {
-            if (j >= right.size() || (i < left.size() && left.get(i) < right.get(j))) {
+        while (i < left.size() && j < right.size()){
+            if (left.get(i) < right.get(j)) {
                 merged.add(left.get(i));
                 i++;
             } else {
                 merged.add(right.get(j));
                 j++;
 
-                // inversion if copying from right list before exhausting left list
-                if (i < left.size()) {
-                    // increment inversion count by number of elements remaining in left
-                    // because all remaining are less than right[j]
-                    count += left.size() - i;
-                }
+                // increment inversion count by number of elements remaining in left
+                // because all remaining are less than right[j]
+                count += left.size() - i;
             }
         }
+        merged.addAll(left.subList(i, left.size()));
+        merged.addAll(right.subList(j, right.size()));
         return new Pair<>(merged, count);
     }
 
