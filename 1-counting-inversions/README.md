@@ -21,7 +21,7 @@ Let's break this down into different types of inversions:
 - **Right** inversion: If both indices > n/2
 - **Split** inversion: If one index <= n/2 and the other is > n/2
 
-The left and right inversions can be counted **recursively**. The split inversions will have to be counted separately. We should aim to count the split inversions in linear time so that the entire algorithm only costs O(NlogN).
+The left and right inversions can be counted **recursively**. The split inversions will have to be counted separately. The recursion divides the array by 2 with each step, so the total cost of the recursive portion is O(logN). We should aim to count the split inversions in linear time so that the entire algorithm only costs O(NlogN).
 
 We can accomplish this by having the recursive steps **sort** in addition to counting inversions. This will naturally uncover any split inversions.
 
