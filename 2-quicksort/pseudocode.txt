@@ -1,50 +1,41 @@
-eQuicksort
----------
+quicksort(array A, int l, int r)
+	// Base case
+	if (n = 1) return
+	// Recursive steps
+	p = choosePivot(A, l, r)
+	partition(A, p, l, r)
+	quicksort(A, 0, p)
+	quicksort(A, p, n)
 
-In short, PIVOTTTT
-http://www.youtube.com/watch?v=n67RYI_0sc0
 
-Base case
-if n = 1 return
-Recursive steps
-p = choosePivot(A, n)
-partition(A) // in-place
-quicksort(A[0-p])
-quicksort(A[p-n])
+choosePivot(array A, int l, int r)
+	// choose a random index between l and r,
+	// left and right subset of indexes in array
+	return random(l, r)
 
-Running time depends CRUCIALLY on what pivot is chosen!
-Must be balanced subproblems (kind of like navigating an unbalanced tree)
-Ex: what if alg always picks first elt for pivot? what if the array is already sorted? O(N^2)!!!!!
-Best pivot? median, which would split array exactly in 2. O(NlogN)
-Solution: Random pivots. Since each elt equally likely, will even out to O(NlogN) on average.
-Quicksort Theorem: For EVERY input array of length n, the average running time of Quicksort with 
-random pivots is O(NlogN). Note that this holds for EVERY input, with no assumptions on the data.
-(This theorem can be proved using some concepts from probability theory.)
-How well quicksort did in a particular execution can be not only measured in running time, but
-also in number of comparisons. So number of comparisons should be O(NlogN)
-Decomposition principle: Note that number of comparisons between 2 given elts will always be either 0 or 1.
-It follows that on average 
 
-Partition around a pivot elt
+partition(subarray A, int p, int l, int r)
+	// NOTE: MUST maintain partitioned section with
+	// all elts A[l+1] to A[i-1] < p and all elts A[i] to A[j-1] > p
 
-- Pick some elt to be partition
-- Partition so that left of pivot is < pivot and right of pivot > pivot
-- Pivot ends up in rightful position as a result
+	// set partition elt to leftmost index
+	swap A[l] and A[p]
+	// let i mark spot between < p and > p in partitioned section
+	// right now that's just to the right of first elt containing partition value
+	i = l + 1
+	
+	seenGreaterThan = false
+	// let j mark spot between partitioned section and unpartitioned section
+	for j = l + 1 to r
+		// if it's a newly seen elt that's < p and we've seen some > p
+		if A[j] < p and seenGreaterThan
+			// rearrange so that partitioned section still obeys
+			swap A[j] and A[i]
+			i++ since middle has moved
+		// if it's a newly seen elt and we haven't seen some > p
+		else if !seenGreaterThan and A[j] > p
+			// remember that we've seen an elt > p
+			seenGreaterThan = true
 
-Partition(A, l, r), for A = array, l = leftmost index, r = rightmost index
-
-Partition Step O(N) where n = r - l + 1 is the length of the input (sub) array
-MUST maintain partitioned section with all elts A[l+1] to A[i-1] < p and all elts A[i] to A[j-1] > p
-By end of subroutine, all of A is partitioned
-
-Let partition be leftmost elt
-- p = A[l]
-Let i mark spot between < p and > p in partitioned section
-i = l + 1
-Let j mark spot between partitioned section and unpartitioned section
-for j = l + 1 to r
-	if A[j] < p // is newly seen elt < p and have seen some > p? (if > p, do nothing)
-		//rearrange so that partitioned section still obeys assumption *
-		swap A[j] and A[i]
-		i++ since middle has moved
-swap A[l] and A[i - 1] // set partition elt back to proper place
+	// set partition elt back to proper place
+	swap A[l] and A[i - 1]
