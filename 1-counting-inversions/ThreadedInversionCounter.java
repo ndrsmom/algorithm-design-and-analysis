@@ -8,7 +8,7 @@ import java.util.concurrent.RecursiveAction;
  * Computes the number of inversions in an array of integers
  * using Java 7 fork/join framework.
  */
-public class InversionCounterMultithreaded {
+public class ThreadedInversionCounter {
 
     public static void main(String[] args) {
         try {
@@ -21,7 +21,7 @@ public class InversionCounterMultithreaded {
 
     public static Long countInversions(String[] args) throws IOException {
         List<Integer> array = InversionCounter.parseArgs(args);
-        InversionCounterTask counter = new InversionCounterTask(array);
+        CounterTask counter = new CounterTask(array);
         ForkJoinPool pool = new ForkJoinPool(4);
         pool.invoke(counter);
         return counter.getCount();
@@ -29,14 +29,12 @@ public class InversionCounterMultithreaded {
 
     // This would typically be in a separate source file,
     // just want to keep each experiment grouped together.
-    public static class InversionCounterTask extends RecursiveAction {
-        private final List<Integer> array;
-        private List<Integer> sorted;
+    public static class CounterTask extends RecursiveAction {
+        private List<Integer> array;
         private Long count = 0L;
 
-        public InversionCounterTask(List<Integer> array) {
+        public CounterTask(List<Integer> array) {
             this.array = array;
-            this.sorted = new ArrayList<>();
         }
 
         public int size() {
@@ -48,10 +46,11 @@ public class InversionCounterMultithreaded {
         }
 
         public List<Integer> array() {
-            return sorted;
+            return array;
         }
 
-        private void merge(InversionCounterTask left, InversionCounterTask right) {
+        protected List<Integer> merge(CounterTask left, CounterTask right) {
+            List<Integer> sorted = new ArrayList<>();
             int i = 0;
             int j = 0;
             while (i < left.size() && j < right.size()) {
@@ -69,6 +68,7 @@ public class InversionCounterMultithreaded {
             }
             sorted.addAll(left.array().subList(i, left.size()));
             sorted.addAll(right.array().subList(j, right.size()));
+            return sorted;
         }
 
         @Override
@@ -77,17 +77,16 @@ public class InversionCounterMultithreaded {
             // base case
             if (length <= 1) {
                 count = 0L;
-                sorted = array;
             } else {
                 int mid = length / 2;
-                InversionCounterTask left = new InversionCounterTask(array.subList(0, mid));
-                InversionCounterTask right = new InversionCounterTask(array.subList(mid, length));
+                CounterTask left = new CounterTask(array.subList(0, mid));
+                CounterTask right = new CounterTask(array.subList(mid, length));
 
                 // execute the recursive steps
                 invokeAll(left, right);
 
                 // combine
-                merge(left, right);
+                array = merge(left, right);
                 count += left.getCount() + right.getCount();
             }
         }
