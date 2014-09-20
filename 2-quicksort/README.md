@@ -11,8 +11,7 @@ Besides being a good algorithm, Quicksort is very elegant and has an interesting
 
 ## Algorithm
 
-PIVOT!!!
-http://www.youtube.com/watch?v=n67RYI_0sc0
+**<a href="http://www.youtube.com/watch?v=n67RYI_0sc0" target="_blank">PIVOT!!!</a>**
 
 This is another divide and conquer algorithm. Naturally for this kind of problem it makes sense to use recursion but the algorithm works much differently than Mergesort. Instead of breaking down the problem with recursion and then combining the resulting pieces, we will first do some work and then repeat on subsets of the problem with recursion.
 
