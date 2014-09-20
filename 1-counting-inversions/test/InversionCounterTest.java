@@ -10,31 +10,31 @@ import java.util.List;
  * Tests for {@link InversionCounter}.
  */
 public class InversionCounterTest {
-    private static final String PATH = "./test/resources/";
+    private static final String PATH = "../resources/test/";
 
     /* Acceptance Tests */
 
     @Test
     public void emptyListTest() throws Exception {
-        long count = InversionCounter.countInversions(new String[]{PATH + "Test1.txt"});
+        long count = InversionCounter.countInversions(new String[]{PATH + "SortTest1.txt"});
         assertEquals(0L, count);
     }
 
     @Test
     public void singleEltListTest() throws Exception {
-        long count = InversionCounter.countInversions(new String[]{PATH + "Test2.txt"});
+        long count = InversionCounter.countInversions(new String[]{PATH + "SortTest2.txt"});
         assertEquals(0L, count);
     }
 
     @Test
     public void inorderListTest() throws Exception {
-        long count = InversionCounter.countInversions(new String[]{PATH + "Test3.txt"});
+        long count = InversionCounter.countInversions(new String[]{PATH + "SortTest3.txt"});
         assertEquals(0L, count);
     }
 
     @Test
     public void backwardsOrderListTest() throws Exception {
-        long count = InversionCounter.countInversions(new String[]{PATH + "Test4.txt"});
+        long count = InversionCounter.countInversions(new String[]{PATH + "SortTest4.txt"});
         assertEquals(15L, count);
     }
 

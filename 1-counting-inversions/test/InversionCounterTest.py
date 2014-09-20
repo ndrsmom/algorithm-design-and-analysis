@@ -6,24 +6,24 @@ class InversionCounterTest(unittest.TestCase):
     """Tests for InversionCounter.py"""
 
     def setUp(self):
-        self.path = "./resources/"
+        self.path = "../../resources/test/"
 
     # Acceptance Tests
 
     def test_empty_list(self):
-        count = InversionCounter.count_inversions(self.path + "Test1.txt")
+        count = InversionCounter.count_inversions(self.path + "SortTest1.txt")
         self.assertEqual(0, count)
 
     def test_single_elt_list(self):
-        count = InversionCounter.count_inversions(self.path + "Test2.txt")
+        count = InversionCounter.count_inversions(self.path + "SortTest2.txt")
         self.assertEqual(0, count)
 
     def test_inorder_list(self):
-        count = InversionCounter.count_inversions(self.path + "Test3.txt")
+        count = InversionCounter.count_inversions(self.path + "SortTest3.txt")
         self.assertEqual(0, count)
 
     def test_backwards_list(self):
-        count = InversionCounter.count_inversions(self.path + "Test4.txt")
+        count = InversionCounter.count_inversions(self.path + "SortTest4.txt")
         self.assertEqual(15, count)
 
     # Unit Tests

@@ -12,7 +12,7 @@ public class ThreadedInversionCounter {
 
     public static void main(String[] args) {
         try {
-            String[] input = {"./resources/IntegerArray.txt"};
+            String[] input = {"../resources/IntegerArray.txt"};
             System.out.println("Inversions: " + countInversions(input));
         } catch (IOException e) {
             e.printStackTrace();

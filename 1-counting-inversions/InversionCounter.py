@@ -1,6 +1,7 @@
 def main():
-    filename = "./resources/IntegerArray.txt"
-    print "Inversions:", count_inversions(filename)
+    filename = "../resources/IntegerArray.txt"
+    count = count_inversions(filename)
+    print "Inversions:", count
 
 
 def count_inversions(filename):

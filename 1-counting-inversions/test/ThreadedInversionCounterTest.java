@@ -12,31 +12,31 @@ import java.util.concurrent.ForkJoinPool;
  * Tests for {@link ThreadedInversionCounter}.
  */
 public class ThreadedInversionCounterTest {
-    private static final String PATH = "./test/resources/";
+    private static final String PATH = "../resources/test/";
 
     /* Acceptance Tests */
 
     @Test
     public void emptyListTest() throws Exception {
-        long count = ThreadedInversionCounter.countInversions(new String[]{PATH + "Test1.txt"});
+        long count = ThreadedInversionCounter.countInversions(new String[]{PATH + "SortTest1.txt"});
         assertEquals(0L, count);
     }
 
     @Test
     public void singleEltListTest() throws Exception {
-        long count = ThreadedInversionCounter.countInversions(new String[]{PATH + "Test2.txt"});
+        long count = ThreadedInversionCounter.countInversions(new String[]{PATH + "SortTest2.txt"});
         assertEquals(0L, count);
     }
 
     @Test
     public void inorderListTest() throws Exception {
-        long count = ThreadedInversionCounter.countInversions(new String[]{PATH + "Test3.txt"});
+        long count = ThreadedInversionCounter.countInversions(new String[]{PATH + "SortTest3.txt"});
         assertEquals(0L, count);
     }
 
     @Test
     public void backwardsOrderListTest() throws Exception {
-        long count = ThreadedInversionCounter.countInversions(new String[]{PATH + "Test4.txt"});
+        long count = ThreadedInversionCounter.countInversions(new String[]{PATH + "SortTest4.txt"});
         assertEquals(15L, count);
     }
 
